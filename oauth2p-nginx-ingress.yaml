@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: oauth2p-ingress
+  annotations:
+    cert-manager.io/issuer: "selfsigned"
+spec:
+  tls:
+    - hosts:
+      - "__DOMAIN__"
+      secretName: tls-secret
+  rules:
+    - host: __DOMAIN__
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: __OATH2PROXY_SERVICE_NAME__
+                port:
+                  number: 80

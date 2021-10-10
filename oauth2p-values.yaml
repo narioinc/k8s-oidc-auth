@@ -1,0 +1,27 @@
+extraArgs:
+  provider: oidc
+  set-xauthrequest: true
+  cookie-secure: true
+  provider-display-name: __DISPLAY_NAME__
+  pass-authorization-header: true
+  set-authorization-header: true
+  client-id: __CLIENT_ID__
+  cookie-expire: 4h0m0s
+  cookie-domain: ".192.168.49.2.nip.io"
+  whitelist-domain: ".192.168.49.2.nip.io"
+  upstream: "static://200"
+  client-secret: __CLIENT_SECRET__
+  oidc-issuer-url: http://<keycloak domain>/auth/realms/local
+  login-url: http://<keycloak domain>/auth/realms/local/protocol/openid-connect/auth
+  redeem-url: "http://<keycloak domain>/auth/realms/local/protocol/openid-connect/token"
+  validate-url: http://<keycloak domain>/auth/realms/local/protocol/openid-connect/userinfo
+  keycloak-group: __KEYCLOAK_APP_NAME__
+
+replicaCount: 1
+resources:
+  limits:
+    cpu: 200m
+    memory: 100Mi
+  requests:
+    cpu: 100m
+    memory: 25Mi

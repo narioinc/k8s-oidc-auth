@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cerebrum-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/auth-signin: https://<oauth2 proxy domain>/oauth2/start?rd=<website to redirect after successful login>
+    nginx.ingress.kubernetes.io/auth-url: https://<oauth2 proxy domain>/oauth2/auth
+    nginx.ingress.kubernetes.io/auth-response-headers: X-Auth-Request-User,X-Auth-Request-Email
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
+    cert-manager.io/issuer: "selfsigned"
+spec:
+  tls:
+    - hosts:
+      - "__DOMAIN__"
+      secretName: __TLS_SECRET_NAME__
+  rules:
+    - host: __DOMAIN__
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name:  __SERVICE_NAME__
+                port:
+                  number: 80
