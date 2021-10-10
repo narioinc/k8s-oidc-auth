@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: cerebrum-ingress
+  name: sample-ingress
   annotations:
     nginx.ingress.kubernetes.io/auth-signin: https://<oauth2 proxy domain>/oauth2/start?rd=<website to redirect after successful login>
     nginx.ingress.kubernetes.io/auth-url: https://<oauth2 proxy domain>/oauth2/auth
